@@ -11,7 +11,7 @@ namespace Exercicio05
         private double valorDiaria;
         private double valorTotal;
 
-        private void receberDadosReserva()
+        public void receberDadosReserva()
         {
             Console.WriteLine("Digite o número da reserva:");
             numeroReserva = int.Parse(Console.ReadLine());
