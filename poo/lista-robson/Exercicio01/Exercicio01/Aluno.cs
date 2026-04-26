@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Exercicio01
 {
@@ -12,40 +10,47 @@ namespace Exercicio01
         private double notaTrabalho;
         private double notaFinal;
 
-        public void receberDados(string RA, string nome, double notaProva, double notaTrabalho)
+        public void ReceberDados()
         {
-            this.RA = RA;
-            this.nome = nome;
-            this.notaProva = notaProva;
-            this.notaTrabalho = notaTrabalho;
+            Console.Write("RA: ");
+            RA = Console.ReadLine();
+
+            Console.Write("Nome: ");
+            nome = Console.ReadLine();
+
+            Console.Write("Nota da prova: ");
+            notaProva = double.Parse(Console.ReadLine());
+
+            Console.Write("Nota do trabalho: ");
+            notaTrabalho = double.Parse(Console.ReadLine());
         }
 
-        public void calcularMedia()
+        public void CalcularMedia()
         {
             notaFinal = (notaProva + notaTrabalho) / 2;
-            Console.WriteLine($"Média calculada: {notaFinal}");
         }
 
-        public Boolean calcularNotaFinal()
+        public bool CalcularNotaFinal()
         {
             if (notaFinal >= 7.0)
             {
-                Console.WriteLine("Aprovado.");
+                Console.WriteLine("Aprovado diretamente.");
                 return true;
-            } 
+            }
             else
             {
                 double notaNecessaria = 10 - notaFinal;
-                Console.WriteLine($"Reprovado. Nota necessária para aprovação: {notaNecessaria}");
+
+                Console.WriteLine("Precisa fazer prova final.");
+                Console.WriteLine($"Nota necessária na prova final: {notaNecessaria:F2}");
+
                 return false;
             }
         }
 
-        public void imprimirNotaFinal()
+        public void ImprimirNotaFinal()
         {
-            Console.WriteLine($"Nota final: {notaFinal}");
+            Console.WriteLine($"Nota final: {notaFinal:F2}");
         }
-
-
     }
 }
