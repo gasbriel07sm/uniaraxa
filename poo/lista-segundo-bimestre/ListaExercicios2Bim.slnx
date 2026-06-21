@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="Exercicio6_Produto/Exercicio6_Produto.csproj" />
+  <Project Path="Exercicio7_Cliente/Exercicio7_Cliente.csproj" />
+  <Project Path="Exercicio8_Desconto/Exercicio8_Desconto.csproj" />
+  <Project Path="Questao1_Funcionario/Questao1_Funcionario.csproj" />
+  <Project Path="Questao2_Pagamento/Questao2_Pagamento.csproj" />
+  <Project Path="Questao3_Veiculo/Questao3_Veiculo.csproj" />
+  <Project Path="Questao4_Aluno/Questao4_Aluno.csproj" />
+</Solution>
