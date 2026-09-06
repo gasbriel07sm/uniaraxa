@@ -1,0 +1,49 @@
+@ApiAula_HostAddress = http://localhost:5211
+
+### a. Adicionar uma pessoa
+POST {{ApiAula_HostAddress}}/api/pessoa
+Content-Type: application/json
+
+{
+  "nome": "Humberto Silva",
+  "cpf": "12345678901",
+  "peso": 70,
+  "altura": 1.75
+}
+
+### a. Adicionar outra pessoa
+POST {{ApiAula_HostAddress}}/api/pessoa
+Content-Type: application/json
+
+{
+  "nome": "Maria Humberto",
+  "cpf": "98765432100",
+  "peso": 55,
+  "altura": 1.60
+}
+
+### d. Buscar todas as pessoas
+GET {{ApiAula_HostAddress}}/api/pessoa
+
+### e. Buscar uma pessoa pelo CPF
+GET {{ApiAula_HostAddress}}/api/pessoa/12345678901
+
+### f. Buscar pessoas com IMC bom (entre 18 e 24)
+GET {{ApiAula_HostAddress}}/api/pessoa/imc-bom
+
+### g. Buscar pessoas por nome
+GET {{ApiAula_HostAddress}}/api/pessoa/buscar-por-nome?nome=Humberto
+
+### b. Atualizar os dados de uma pessoa pelo CPF
+PUT {{ApiAula_HostAddress}}/api/pessoa/12345678901
+Content-Type: application/json
+
+{
+  "nome": "Humberto Silva Junior",
+  "cpf": "12345678901",
+  "peso": 80,
+  "altura": 1.75
+}
+
+### c. Remover uma pessoa pelo CPF
+DELETE {{ApiAula_HostAddress}}/api/pessoa/98765432100
