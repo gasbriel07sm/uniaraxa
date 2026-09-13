@@ -1,0 +1,135 @@
+@ApiAula_HostAddress = http://localhost:5211
+
+######################################################################
+# QUESTÃO 4 - ALUNO (Nome, Ra, Email, Cpf, Ativo)
+# Validação customizada do RA: começa com "RA" + 6 dígitos (0 a 9).
+######################################################################
+
+### a. Adicionar um aluno (VÁLIDO)
+POST {{ApiAula_HostAddress}}/api/aluno
+Content-Type: application/json
+
+{
+  "nome": "Maria Souza",
+  "ra": "RA123456",
+  "email": "maria@email.com",
+  "cpf": "12345678901",
+  "ativo": true
+}
+
+### a. Adicionar outro aluno (VÁLIDO)
+POST {{ApiAula_HostAddress}}/api/aluno
+Content-Type: application/json
+
+{
+  "nome": "João Lima",
+  "ra": "RA654321",
+  "email": "joao@email.com",
+  "cpf": "98765432100",
+  "ativo": false
+}
+
+### Aluno INVÁLIDO (RA fora do padrão, e-mail inválido, cpf incompleto)
+POST {{ApiAula_HostAddress}}/api/aluno
+Content-Type: application/json
+
+{
+  "nome": "Ab",
+  "ra": "RA12",
+  "email": "email-invalido",
+  "cpf": "123",
+  "ativo": true
+}
+
+### d. Buscar todos os alunos
+GET {{ApiAula_HostAddress}}/api/aluno
+
+### e. Buscar um aluno pelo RA
+GET {{ApiAula_HostAddress}}/api/aluno/RA123456
+
+### f. Buscar apenas alunos ativos
+GET {{ApiAula_HostAddress}}/api/aluno/ativos
+
+### g. Buscar alunos por nome
+GET {{ApiAula_HostAddress}}/api/aluno/buscar-por-nome?nome=Maria
+
+### b. Atualizar um aluno pelo RA
+PUT {{ApiAula_HostAddress}}/api/aluno/RA123456
+Content-Type: application/json
+
+{
+  "nome": "Maria Souza Silva",
+  "ra": "RA123456",
+  "email": "maria.silva@email.com",
+  "cpf": "12345678901",
+  "ativo": true
+}
+
+### c. Remover um aluno pelo RA
+DELETE {{ApiAula_HostAddress}}/api/aluno/RA654321
+
+
+######################################################################
+# QUESTÃO 5 - PRODUTO (Descrição, preço, estoque, codigoProduto)
+# Validação customizada do código: formato "AAA-1234"
+# (3 letras maiúsculas, hífen, 4 números - exatamente 8 caracteres).
+######################################################################
+
+### a. Adicionar um produto (VÁLIDO)
+POST {{ApiAula_HostAddress}}/api/produto
+Content-Type: application/json
+
+{
+  "descricao": "Caneta esferográfica azul",
+  "preco": 2.50,
+  "estoque": 100,
+  "codigoProduto": "ABC-1234"
+}
+
+### a. Adicionar outro produto (VÁLIDO)
+POST {{ApiAula_HostAddress}}/api/produto
+Content-Type: application/json
+
+{
+  "descricao": "Caderno 96 folhas",
+  "preco": 15.90,
+  "estoque": 0,
+  "codigoProduto": "CAD-0096"
+}
+
+### Produto INVÁLIDO (código fora do padrão, preço zero)
+POST {{ApiAula_HostAddress}}/api/produto
+Content-Type: application/json
+
+{
+  "descricao": "X",
+  "preco": 0,
+  "estoque": -5,
+  "codigoProduto": "abc1234"
+}
+
+### d. Buscar todos os produtos
+GET {{ApiAula_HostAddress}}/api/produto
+
+### e. Buscar um produto pelo código
+GET {{ApiAula_HostAddress}}/api/produto/ABC-1234
+
+### f. Buscar apenas produtos em estoque
+GET {{ApiAula_HostAddress}}/api/produto/em-estoque
+
+### g. Buscar produtos por descrição
+GET {{ApiAula_HostAddress}}/api/produto/buscar-por-descricao?descricao=caneta
+
+### b. Atualizar um produto pelo código
+PUT {{ApiAula_HostAddress}}/api/produto/ABC-1234
+Content-Type: application/json
+
+{
+  "descricao": "Caneta esferográfica azul (caixa)",
+  "preco": 24.90,
+  "estoque": 50,
+  "codigoProduto": "ABC-1234"
+}
+
+### c. Remover um produto pelo código
+DELETE {{ApiAula_HostAddress}}/api/produto/CAD-0096
