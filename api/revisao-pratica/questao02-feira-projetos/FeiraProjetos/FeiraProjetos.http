@@ -1,0 +1,92 @@
+@FeiraProjetos_HostAddress = http://localhost:5302
+
+######################################################################
+# QUESTÃO 2 - FEIRA DE PROJETOS INTEGRADORES
+######################################################################
+
+### 1. Cadastrar projeto (VÁLIDO)
+POST {{FeiraProjetos_HostAddress}}/api/projeto
+Content-Type: application/json
+
+{
+  "nome": "Biblioteca Itinerante",
+  "email": "grupo1@email.com",
+  "turma": 4,
+  "descricao": "Sistema para gerenciar empréstimos de uma biblioteca móvel.",
+  "numero": 10
+}
+
+### 1. Cadastrar outro projeto (VÁLIDO)
+POST {{FeiraProjetos_HostAddress}}/api/projeto
+Content-Type: application/json
+
+{
+  "nome": "Horta Inteligente",
+  "email": "grupo2@email.com",
+  "turma": 6,
+  "descricao": "Monitoramento de umidade do solo com sensores IoT.",
+  "numero": 15
+}
+
+### 1. Projeto com número REPETIDO (409 - regra de negócio)
+POST {{FeiraProjetos_HostAddress}}/api/projeto
+Content-Type: application/json
+
+{
+  "nome": "Outro Projeto",
+  "email": "grupo3@email.com",
+  "turma": 2,
+  "descricao": "Descrição qualquer.",
+  "numero": 10
+}
+
+### 1. Projeto INVÁLIDO (nome curto, e-mail inválido, turma e número fora da faixa)
+POST {{FeiraProjetos_HostAddress}}/api/projeto
+Content-Type: application/json
+
+{
+  "nome": "Ab",
+  "email": "email-invalido",
+  "turma": 0,
+  "descricao": "",
+  "numero": 5
+}
+
+### 2. Listar projetos
+GET {{FeiraProjetos_HostAddress}}/api/projeto
+
+### 3. Registrar visita (VÁLIDA)
+POST {{FeiraProjetos_HostAddress}}/api/visita
+Content-Type: application/json
+
+{
+  "raAluno": "RA123456",
+  "dataVisita": "2026-10-15T14:30:00",
+  "numeroProjeto": 10,
+  "nota": 5
+}
+
+### 3. Registrar visita com nota INVÁLIDA (400 - nota deve estar entre 0 e 5)
+POST {{FeiraProjetos_HostAddress}}/api/visita
+Content-Type: application/json
+
+{
+  "raAluno": "RA654321",
+  "dataVisita": "2026-10-15T15:00:00",
+  "numeroProjeto": 10,
+  "nota": 7
+}
+
+### 3. Registrar visita em projeto inexistente (404)
+POST {{FeiraProjetos_HostAddress}}/api/visita
+Content-Type: application/json
+
+{
+  "raAluno": "RA654321",
+  "dataVisita": "2026-10-15T15:00:00",
+  "numeroProjeto": 99,
+  "nota": 3
+}
+
+### 4. Consultar visitas do projeto 10
+GET {{FeiraProjetos_HostAddress}}/api/visita/projeto/10

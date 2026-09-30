@@ -1,0 +1,77 @@
+@Votacao_HostAddress = http://localhost:5301
+
+######################################################################
+# QUESTÃO 1 - ELEIÇÃO DO REPRESENTANTE DE TURMA
+######################################################################
+
+### 1. Cadastrar candidato (VÁLIDO)
+POST {{Votacao_HostAddress}}/api/candidato
+Content-Type: application/json
+
+{
+  "nome": "Maria Souza",
+  "email": "maria@email.com",
+  "turma": 3,
+  "descricaoProposta": "Criar grupos de estudo semanais e melhorar a comunicação com a coordenação.",
+  "numero": 10
+}
+
+### 1. Cadastrar outro candidato (VÁLIDO)
+POST {{Votacao_HostAddress}}/api/candidato
+Content-Type: application/json
+
+{
+  "nome": "João Lima",
+  "email": "joao@email.com",
+  "turma": 3,
+  "descricaoProposta": "Organizar eventos de integração entre as turmas.",
+  "numero": 22
+}
+
+### 1. Candidato com número REPETIDO (409 - regra de negócio)
+POST {{Votacao_HostAddress}}/api/candidato
+Content-Type: application/json
+
+{
+  "nome": "Carlos Pereira",
+  "email": "carlos@email.com",
+  "turma": 5,
+  "descricaoProposta": "Proposta qualquer.",
+  "numero": 10
+}
+
+### 1. Candidato INVÁLIDO (nome curto, e-mail inválido, turma e número fora da faixa)
+POST {{Votacao_HostAddress}}/api/candidato
+Content-Type: application/json
+
+{
+  "nome": "Ab",
+  "email": "email-invalido",
+  "turma": 9,
+  "descricaoProposta": "",
+  "numero": 100
+}
+
+### 2. Listar candidatos
+GET {{Votacao_HostAddress}}/api/candidato
+
+### 3. Registrar voto (VÁLIDO)
+POST {{Votacao_HostAddress}}/api/voto
+Content-Type: application/json
+
+{
+  "raAluno": "RA123456",
+  "numeroCandidato": 10
+}
+
+### 3. Registrar voto em candidato inexistente (404)
+POST {{Votacao_HostAddress}}/api/voto
+Content-Type: application/json
+
+{
+  "raAluno": "RA654321",
+  "numeroCandidato": 99
+}
+
+### 4. Consultar votos do candidato 10
+GET {{Votacao_HostAddress}}/api/voto/candidato/10
